@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Projects — Mehran Javdani</title>
+<meta name="description" content="Complete portfolio and commercial archive of motion designer Mehran Javdani.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080808;
+  --bg-card: rgba(255, 255, 255, 0.025);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(200, 255, 0, 0.45);
+  --text: #f0f0f0;
+  --muted: #b8b8b8;
+  --dim: #7c7c7c;
+  --accent: #c8ff00;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+::selection { background: var(--accent); color: #000; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  cursor: none;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+::-webkit-scrollbar { width: 7px; }
+::-webkit-scrollbar-track { background: #080808; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.16); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* CURSOR */
+#cur {
+  width: 28px; height: 28px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 99999;
+  mix-blend-mode: difference;
+  transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), background 0.3s var(--ease-out);
+  opacity: 0;
+  will-change: transform;
+}
+#dot {
+  width: 5px; height: 5px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 100000;
+  opacity: 0;
+  will-change: transform;
+}
+body.mouse-active #cur, body.mouse-active #dot { opacity: 1; }
+#cur.on { width: 52px; height: 52px; background: var(--accent); border-color: transparent; opacity: 0.9; }
+#dot.hide { opacity: 0; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 7%;
+  background: rgba(8,8,8,0.85); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+.logo {
+  font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px;
+  color: var(--text); text-decoration: none; cursor: none;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.logo-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+.back-link {
+  font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--muted); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px; cursor: none;
+  transition: color 0.25s;
+}
+.back-link:hover { color: var(--accent); }
+
+/* MAIN CONTENT */
+.container {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 140px 7% 100px;
+}
+
+.page-head {
+  margin-bottom: 50px;
+}
+.page-label {
+  font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 14px;
+}
+.page-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 9vw, 96px);
+  line-height: 0.92; color: #fff; letter-spacing: 1px;
+}
+
+/* FILTERS */
+.filter-bar {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 50px;
+}
+.filter-btn {
+  font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--muted); background: var(--bg-card);
+  border: 1px solid var(--border); padding: 10px 22px; border-radius: 50px;
+  cursor: none; transition: var(--transition);
+}
+.filter-btn:hover, .filter-btn.active {
+  color: #000; background: var(--accent); border-color: var(--accent);
+  box-shadow: 0 4px 15px rgba(200, 255, 0, 0.25);
+}
+
+/* GRID */
+.plist {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 36px;
+}
+
+.pitem {
+  display: flex; flex-direction: column; gap: 20px; padding: 22px;
+  background: var(--bg-card); border-radius: 24px; border: 1px solid var(--border);
+  text-decoration: none; color: inherit; transition: var(--transition);
+  cursor: none; position: relative; overflow: hidden; backdrop-filter: blur(8px);
+}
+.pitem:hover {
+  border-color: var(--border-hover); transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.pthumb {
+  position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden;
+  border-radius: 14px; border: 1px solid var(--border); background: #111;
+}
+.pthumb img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(0.7) brightness(0.85); transition: 0.6s var(--ease-out);
+}
+.pthumb-vid {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity 0.5s var(--ease-out); transform: scale(1.02);
+  pointer-events: none;
+}
+.pitem:hover .pthumb img { filter: grayscale(0) brightness(1); transform: scale(1.04); }
+.pitem:hover .pthumb-vid { opacity: 1; transform: scale(1); }
+
+.pthumb-badge {
+  position: absolute; bottom: 12px; right: 12px; z-index: 3;
+  opacity: 0; transform: translateY(8px); transition: 0.3s var(--ease-out);
+}
+.pthumb-badge span {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px;
+  text-transform: uppercase; color: #000; background: var(--accent);
+  padding: 6px 14px; border-radius: 20px; font-weight: 700;
+}
+.pitem:hover .pthumb-badge { opacity: 1; transform: translateY(0); }
+
+.pinfo { display: flex; flex-direction: column; gap: 8px; }
+.pinfo-top { display: flex; justify-content: space-between; align-items: center; }
+.pindex { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 1.5px; }
+.ptag { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 1px; }
+.ptitle-text { font-family: 'Bebas Neue', sans-serif; font-size: 42px; line-height: 1; color: #fff; transition: color 0.3s; }
+.pitem:hover .ptitle-text { color: var(--accent); }
+.pdesc { font-size: 13px; color: var(--muted); line-height: 1.5; font-weight: 300; }
+
+/* OVERLAY */
+#ov {
+  position: fixed; inset: 0; z-index: 1000; background: var(--bg);
+  transform: translateX(100%); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+  overflow-y: auto; overflow-x: hidden;
+  pointer-events: none; visibility: hidden;
+}
+#ov.open { transform: translateX(0); pointer-events: auto; visibility: visible; }
+.ov-nav {
+  display: flex; justify-content: space-between; align-items: center; padding: 22px 7%;
+  border-bottom: 1px solid var(--border); position: sticky; top: 0;
+  background: rgba(8, 8, 8, 0.85); backdrop-filter: blur(18px); z-index: 20;
+}
+.ov-close {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'DM Mono', monospace; background: none; border: 1px solid var(--border);
+  padding: 8px 18px; border-radius: 50px; color: var(--text); cursor: none;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; transition: var(--transition);
+}
+.ov-close:hover { border-color: var(--accent); color: var(--accent); }
+.ov-content { padding: 60px 8% 100px; max-width: 1200px; margin: 0 auto; }
+.ov-main-video { width: 100%; border-radius: 24px; border: 1px solid var(--border); margin: 30px 0 80px; overflow: hidden; background: #111; }
+.ov-main-video video { width: 100%; display: block; }
+.ov-block { display: grid; grid-template-columns: 1.25fr 1fr; gap: 70px; align-items: center; margin-bottom: 90px; }
+.ov-block.reverse .ov-img { order: 2; }
+.ov-block.reverse .ov-text-col { order: 1; }
+.ov-img { width: 100%; border-radius: 20px; border: 1px solid var(--border); overflow: hidden; background: #111; }
+.ov-img img { width: 100%; display: block; }
+.ov-text-label { font-family: 'DM Mono', monospace; color: var(--accent); font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.ov-title-main { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 8vw, 88px); color: #fff; line-height: 0.95; margin-bottom: 16px; }
+.ov-text-h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(38px, 5vw, 56px); margin-bottom: 18px; color: #fff; line-height: 1; }
+.ov-text-p { color: var(--muted); font-size: 15px; line-height: 1.8; font-weight: 300; }
+
+@media (max-width: 900px) {
+  .plist, .ov-block { grid-template-columns: 1fr; }
+  .ov-block.reverse .ov-img, .ov-block.reverse .ov-text-col { order: 0; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  #cur, #dot { display: none !important; }
+  body, a, button, .pitem, .filter-btn, .ov-close, .logo { cursor: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="dot"></div>
+
+<nav>
+  <a href="index.html" class="logo">MJ <span class="logo-dot"></span></a>
+  <a href="index.html" class="back-link">← Back to Portfolio</a>
+</nav>
+
+<div class="container">
+  <div class="page-head">
+    <div class="page-label">Commercial Portfolio & Archive</div>
+    <h1 class="page-title">ALL PROJECTS<span style="color:var(--accent)">.</span></h1>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All (4)</button>
+    <button class="filter-btn" data-filter="3d">3D Motion (2)</button>
+    <button class="filter-btn" data-filter="product">Product Design (1)</button>
+    <button class="filter-btn" data-filter="lighting">Lighting & VFX (1)</button>
+  </div>
+
+  <div class="plist">
+    <!-- Airbuds -->
+    <a class="pitem" href="#" data-p="airbuds" data-cat="3d">
+      <div class="pthumb">
+        <img src="thumb.png" alt="Airbuds Pro" loading="lazy">
+        <video class="pthumb-vid" muted loop playsinline preload="metadata">
+          <source src="airbuds-main.mp4" type="video/mp4">
+        </video>
+        <div class="pthumb-badge"><span>Explore ↗</span></div>
+      </div>
+      <div class="pinfo">
+        <div class="pinfo-top">
+          <span class="pindex">01 / 04</span>
+          <span class="ptag">3D Motion</span>
+        </div>
+        <h2 class="ptitle-text">Airbuds Pro</h2>
+        <p class="pdesc">Procedural crystal formations & acoustic particle dynamics</p>
+      </div>
+    </a>
+
+    <!-- Charger -->
+    <a class="pitem" href="#" data-p="charger" data-cat="product">
+      <div class="pthumb">
+        <img src="charger-thumb.png" alt="Powerology 140W" loading="lazy">
+        <video class="pthumb-vid" muted loop playsinline preload="metadata">
+          <source src="charger-main.mp4" type="video/mp4">
+        </video>
+        <div class="pthumb-badge"><span>Explore ↗</span></div>
+      </div>
+      <div class="pinfo">
+        <div class="pinfo-top">
+          <span class="pindex">02 / 04</span>
+          <span class="ptag">Product Design</span>
+        </div>
+        <h2 class="ptitle-text">Powerology 140W</h2>
+        <p class="pdesc">GaN microchip architecture & multi-port power delivery</p>
+      </div>
+    </a>
+
+    <!-- Projector -->
+    <a class="pitem" href="#" data-p="projector" data-cat="lighting">
+      <div class="pthumb">
+        <img src="projector-thumb.png" alt="Cinematic Projector" loading="lazy">
+        <video class="pthumb-vid" muted loop playsinline preload="metadata">
+          <source src="projector-main.mp4" type="video/mp4">
+        </video>
+        <div class="pthumb-badge"><span>Explore ↗</span></div>
+      </div>
+      <div class="pinfo">
+        <div class="pinfo-top">
+          <span class="pindex">03 / 04</span>
+          <span class="ptag">3D Lighting & VFX</span>
+        </div>
+        <h2 class="ptitle-text">Cinematic Projector</h2>
+        <p class="pdesc">Volumetric light beams & acoustic speaker waves</p>
+      </div>
+    </a>
+
+    <!-- Powerbank -->
+    <a class="pitem" href="#" data-p="powerbank" data-cat="3d">
+      <div class="pthumb">
+        <img src="pb-thumb.png" alt="Powerology 65W" loading="lazy">
+        <video class="pthumb-vid" muted loop playsinline preload="metadata">
+          <source src="pb-main.mp4" type="video/mp4">
+        </video>
+        <div class="pthumb-badge"><span>Explore ↗</span></div>
+      </div>
+      <div class="pinfo">
+        <div class="pinfo-top">
+          <span class="pindex">04 / 04</span>
+          <span class="ptag">Industrial Animation</span>
+        </div>
+        <h2 class="ptitle-text">Powerology 65W</h2>
+        <p class="pdesc">Schematic blueprints & OLED circuit safety telemetry</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- OVERLAY MODAL -->
+<div id="ov">
+  <div class="ov-nav">
+    <button class="ov-close" id="closeOv">← Back to Gallery [ESC]</button>
+    <div class="logo">MJ <span class="logo-dot"></span></div>
+  </div>
+  <div class="ov-content" id="ovContent"></div>
+</div>
+
+<script>
+// Filter System
+const filterBtns = document.querySelectorAll('.filter-btn');
+const projectCards = document.querySelectorAll('.pitem');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+
+    projectCards.forEach(card => {
+      if (f === 'all' || card.dataset.cat === f) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+// Cursor
+const cur = document.getElementById('cur'), dot = document.getElementById('dot');
+let mx = -100, my = -100, cx = -100, cy = -100, mouseActive = false;
+
+window.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  if (!mouseActive) { mouseActive = true; document.body.classList.add('mouse-active'); cx = mx; cy = my; }
+  dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+});
+
+function animateCursor() {
+  if (mouseActive) {
+    cx += (mx - cx) * 0.16; cy += (my - cy) * 0.16;
+    cur.style.transform = `translate3d(${cx}px, ${cy}px, 0) translate(-50%, -50%)`;
+  }
+  requestAnimationFrame(animateCursor);
+}
+requestAnimationFrame(animateCursor);
+
+document.addEventListener('mouseover', e => {
+  if (e.target.closest('a, button, .pitem, .filter-btn, .ov-close')) {
+    cur.classList.add('on'); dot.classList.add('hide');
+  }
+});
+document.addEventListener('mouseout', e => {
+  if (e.target.closest('a, button, .pitem, .filter-btn, .ov-close')) {
+    cur.classList.remove('on'); dot.classList.remove('hide');
+  }
+});
+
+// Card Hover Videos
+projectCards.forEach(item => {
+  const vid = item.querySelector('.pthumb-vid');
+  if (vid) {
+    item.addEventListener('mouseenter', () => {
+      vid.currentTime = 0;
+      const p = vid.play();
+      if (p !== undefined) p.catch(() => {});
+    });
+    item.addEventListener('mouseleave', () => vid.pause());
+  }
+});
+
+// Modal Data
+const PROJECTS = {
+  airbuds: {
+    title: 'Airbuds Pro', category: '3D Motion', desc: 'Porodo Soundtec Popwave commercial featuring particle dynamics and translucent product shaders.',
+    video: 'airbuds-main.mp4',
+    phases: [
+      { phase: 'Phase 01', title: 'Translucent Aesthetics', desc: 'Custom smoked-glass shaders revealing internal circuitry.', img: 'img1.png' },
+      { phase: 'Phase 02', title: 'Particle Morphing', desc: 'Acoustic particle dynamics forming the earbud shape.', img: 'img2.png' },
+      { phase: 'Phase 03', title: 'Crystal Clear', desc: 'Visualizing acoustic purity with dark quartz crystal formations.', img: 'img3.png' }
+    ],
+    study: { img: 'img4.png', desc: 'Precision engineering studio render with technical crosshair markers.' }
+  },
+  charger: {
+    title: 'Powerology 140W', category: 'Product Design', desc: 'Showcase for the 140W 4-Port GaN Charger highlighting microchip telemetry.',
+    video: 'charger-main.mp4',
+    phases: [
+      { phase: 'Phase 01', title: 'Industrial Form Factor', desc: 'Weightless hero shots emphasizing matte curvature.', img: 'charger-1.png' },
+      { phase: 'Phase 02', title: 'Quad-Port Matrix', desc: 'The 4-port power delivery interface.', img: 'charger-2.png' },
+      { phase: 'Phase 03', title: 'GaN Core Architecture', desc: 'Internal Gallium Nitride processor visualization.', img: 'charger-3.png' }
+    ],
+    study: { img: 'charger-4.png', desc: 'Smart screen interactive display study.' }
+  },
+  projector: {
+    title: 'Cinematic Projector', category: '3D Lighting & VFX', desc: 'Atmospheric product film for portable Full HD projector with optical glass refraction.',
+    video: 'projector-main.mp4',
+    phases: [
+      { phase: 'Phase 01', title: 'HiFi Acoustic Waves', desc: 'Visualizing built-in speaker performance.', img: 'proj-1.png' },
+      { phase: 'Phase 02', title: '270° Versatile Stand', desc: 'Tactile matte finish and rotatable stand.', img: 'proj-2.png' },
+      { phase: 'Phase 03', title: 'Volumetric Projection', desc: '250 ANSI Lumens light simulation.', img: 'proj-3.png' }
+    ],
+    study: { img: 'proj-4.png', desc: 'Exploded view of the 6-layer optical glass array.' }
+  },
+  powerbank: {
+    title: 'Powerology 65W', category: 'Industrial Animation', desc: 'Technical blueprint aesthetic visualizing power delivery and safety systems.',
+    video: 'pb-main.mp4',
+    phases: [
+      { phase: 'Phase 01', title: 'Technical Blueprints', desc: 'Schematic drawings of internal components.', img: 'pb-thumb.png' },
+      { phase: 'Phase 02', title: 'Internal Safeguards', desc: '3D model combined with circuit protection diagram.', img: 'pb-2.png' },
+      { phase: 'Phase 03', title: 'Smart Power Delivery', desc: 'OLED telemetry display simulation.', img: 'pb-3.png' }
+    ],
+    study: { img: 'pb-4.png', desc: 'Portability and compact form factor render study.' }
+  }
+};
+
+const ov = document.getElementById('ov');
+const ovContent = document.getElementById('ovContent');
+
+function openOverlay(pId) {
+  const p = PROJECTS[pId];
+  if (!p) return;
+  ovContent.innerHTML = `
+    <div style="margin-bottom:40px">
+      <span class="ov-text-label">${p.category}</span>
+      <h1 class="ov-title-main">${p.title}</h1>
+      <p class="ov-text-p" style="max-width:700px">${p.desc}</p>
+    </div>
+    <div class="ov-main-video">
+      <video autoplay muted loop controls playsinline><source src="${p.video}" type="video/mp4"></video>
+    </div>
+    ${p.phases.map((ph, idx) => `
+      <div class="ov-block ${idx % 2 === 1 ? 'reverse' : ''}">
+        <div class="ov-img"><img src="${ph.img}" alt="${ph.title}"></div>
+        <div class="ov-text-col">
+          <span class="ov-text-label">${ph.phase}</span>
+          <h2 class="ov-text-h2">${ph.title}</h2>
+          <p class="ov-text-p">${ph.desc}</p>
+        </div>
+      </div>
+    `).join('')}
+    <div class="ov-img" style="margin-top:40px; border-radius:24px"><img src="${p.study.img}" alt="Study"></div>
+    <p class="ov-text-p" style="text-align:center; margin-top:20px">${p.study.desc}</p>
+  `;
+  ov.scrollTop = 0;
+  ov.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  const v = ovContent.querySelector('video');
+  if (v) v.play().catch(() => {});
+}
+
+function closeOverlay() {
+  ov.classList.remove('open');
+  document.body.style.overflow = '';
+  const v = ov.querySelector('video');
+  if (v) { v.pause(); v.src = ''; }
+}
+
+projectCards.forEach(card => {
+  card.addEventListener('click', e => {
+    e.preventDefault();
+    openOverlay(card.dataset.p);
+  });
+});
+document.getElementById('closeOv').addEventListener('click', closeOverlay);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
+</script>
+</body>
+</html>
